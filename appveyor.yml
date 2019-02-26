@@ -1,0 +1,38 @@
+# version format
+version: 1.0.{build}
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+    
+# Build worker image (VM template)
+image: Visual Studio 2017
+
+# RDP user is DAIAD\appveyor
+# password in project settings
+# more rdp info https://www.appveyor.com/docs/how-to/rdp-to-build-worker/
+#environment:
+#  APPVEYOR_RDP_PASSWORD: <password_here>
+
+# install csp
+install:
+  # dowloading and extracting packages
+  - ps: (New-Object System.Net.WebClient).DownloadFile("https://ci.appveyor.com/api/projects/CryptoProLLC/corefx/artifacts/artifacts/packages.zip", "C:\projects\packages.zip")
+  - ps: Expand-Archive C:\projects\packages.zip -DestinationPath C:\projects\packages  
+  # enable-rdp
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+# build script logic
+build_script: 
+  - clean -all
+  - build.cmd -SkipTests=true 
+
+# disable automatic test discovery
+test: off
+ 
+# artifacts on succesfull build 
+artifacts:
+  - path: bin\win-x64.Debug\packages\*.msi
+    name: packages
