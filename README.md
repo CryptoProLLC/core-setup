@@ -1,6 +1,12 @@
 .NET Core Runtime & Host Setup Repo
 ===================================
 
+### CryptoPro Build
+
+| Linux build | Windows build |
+|:---:|:---:|
+| None | [![Build status](https://ci.appveyor.com/api/projects/status/9n15lqwa9t9h90po?svg=true)](https://ci.appveyor.com/project/CryptoProLLC/core-setup) |
+
 This repo contains the code to build the .NET Core runtime, libraries and shared host (`dotnet`) installers for
 all supported platforms. It **does not** contain the actual sources to .NET Core runtime; this source is split across
 the dotnet/coreclr repo (runtime) and dotnet/corefx repo (libraries).
