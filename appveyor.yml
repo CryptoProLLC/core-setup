@@ -35,4 +35,8 @@ test: off
 # artifacts on succesfull build 
 artifacts:
   - path: bin\win-x64.Debug\packages\*.msi
-    name: packages
+    name: msi
+  - path: bin\win-x64.Debug\packages\*.exe
+    name: installer
+  - path: bin\win-x64.Debug\packages\*.zip
+    name: zip
